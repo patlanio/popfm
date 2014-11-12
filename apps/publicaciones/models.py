@@ -11,7 +11,7 @@ class Categoria(models.Model):
 
 class Publicacion(models.Model):
 	titulo = models.CharField(max_length=48, help_text='Titulo de la publicacion, maximo 48 caracteres')
-	imagen = models.ImageField(upload_to='publicaciones/portadas', verbose_name='Imagen principal' help_text='Es la imagen que da a entender que tipo de texto contendra la publicacion; esta imagen aparecera en la pagina principal del sitio en caso de que se marque la opcion "En portada" ')
+	imagen = models.ImageField(upload_to='publicaciones/portadas', verbose_name='Imagen principal', help_text='Da a entender el tipo contenido de la publicacion. Esta aparecera en la pagina principal del sitio si se marca la opcion -En portada- ')
 	parrafo_principal = models.TextField(max_length=250, help_text='Debe ser preciso y corto (maximo 250 caracteres), aparecera como el texto de enganche para los usuarios')
 	cuerpo = HTMLField(help_text='Cuerpo principal de la entrada')
 	#tipo_publicacion = models.CharField(max_length=15, choices=TIPOS_DE_PUBLICACION, default="publicacion")
