@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     
     url(r'^$', 'apps.general.views.index', name='index'),
     url(r'^salir/$', 'apps.general.views.logOut'),
+    url(r'^', include('apps.publicaciones.urls', namespace="publicaciones")),
 )
