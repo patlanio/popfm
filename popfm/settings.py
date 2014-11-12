@@ -42,7 +42,7 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'apps.general',
     'apps.publicaciones',
-    #'apps.publico',
+    'apps.publico',
     #'apps.programas',
     #'apps.eventos',
     #'apps.multimedia',
