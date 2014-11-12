@@ -1,0 +1,25 @@
+{% extends 'base_contenido.html' %}
+{% block title %}Publicaciones{% endblock title %}
+{% block contenido_central %}
+	<div class="publicaciones">
+		<div class="encabezado-seccion">
+			<h2>Todas nuestras publicaciones</h2>
+		</div>
+		{% if todas_las_publicaciones %}
+			{% for publicacion in todas_las_publicaciones %}
+				<article class="publicacion">
+					<a href="{% url 'publicaciones:publicacion' publicacion.id %}">
+						<img src="{{MEDIA_URL}}{{publicacion.imagen_principal}}">
+						<h2>{{publicacion.titulo}}</h2>
+					</a>
+					<div class="info">
+						<p class="descripcion">{{publicacion.parrafo_principal|slice:":120"}}</p>
+						<span class="fecha">Publicado el {{publicacion.fecha_publicacion}}</span>
+					</div>
+				</article>
+			{% endfor %}
+		{% else %}
+			<p>No hay publicaciones.</p>
+		{% endif %}
+	</div>
+{% endblock contenido_central %}

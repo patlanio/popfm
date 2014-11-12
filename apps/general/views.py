@@ -12,14 +12,14 @@ def index(request):
 	ultimas_publicaciones = Publicacion.objects.filter(listo_para_publicar = True).order_by('-fecha_publicacion')[:12]
 	saludos = Saludo.objects.all()
 	programa_al_aire = Programa.objects.filter(hora_fin__lte=timezone.now()).order_by('-hora_fin')[:1]
-	
-	 if request.method == 'POST':
-	 	formulario = SaludoForm(request.POST)
-	 	if formulario.is_valid():
-	 		formulario.save()
-	 		return HttpResponseRedirect('/')
-	 else:
-	 	formulario = SaludoForm()
+
+	if request.method == 'POST':
+		formulario = SaludoForm(request.POST)
+		if formulario.is_valid():
+			formulario.save()
+			return HttpResponseRedirect('/')
+	else:
+		formulario = SaludoForm()
 
 	contexto_general = get_contexto_general(request)
 	contexto_local = {'publicaciones_en_portada':publicaciones_en_portada, 'ultimas_publicaciones':ultimas_publicaciones}

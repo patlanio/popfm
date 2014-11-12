@@ -1,0 +1,15 @@
+{% extends 'base_contenido.html' %}
+{% block title %}{{publicacion.titulo}}{% endblock title %}
+{% block contenido_central %}
+	<article class="articulo-completo">
+		{% if publicacion %}
+			<h1>{{publicacion.titulo}}</h1>
+			<h4>Publicado el {{publicacion.fecha_publicacion}}</h4>
+			<img class="imagen-principal" src="{{MEDIA_URL}}{{publicacion.imagen_principal}}" alt="">
+			<p class="parrafo-principal">{{publicacion.parrafo_principal}}</p>
+			<p class="cuerpo">{{publicacion.cuerpo_publicacion|safe}}</p>
+		{% else %}
+			<h1>Hubo un error al cargar la publicacion, probablemente ya no existe; intetalo mas tarde.</h1>
+		{% endif %}
+	</article>
+{% endblock contenido_central %}
