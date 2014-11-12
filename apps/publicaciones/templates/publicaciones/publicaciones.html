@@ -9,7 +9,7 @@
 			{% for publicacion in todas_las_publicaciones %}
 				<article class="publicacion">
 					<a href="{% url 'publicaciones:publicacion' publicacion.id %}">
-						<img src="{{MEDIA_URL}}{{publicacion.imagen_principal}}">
+						<img src="{{MEDIA_URL}}{{publicacion.imagen}}">
 						<h2>{{publicacion.titulo}}</h2>
 					</a>
 					<div class="info">

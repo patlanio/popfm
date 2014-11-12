@@ -13,9 +13,9 @@
 				{% if publicaciones_en_portada %}
 					{% spaceless %}
 					{% for portada in publicaciones_en_portada %}
-							<article u="image" class="portada slide" style="background-image: url({{MEDIA_URL}}{{portada.imagen}});">
+							<article class="portada slide" style="background-image: url({{MEDIA_URL}}{{portada.imagen}});">
 								<div class="contenido-portada">
-									<a class="titulo-portada" href="{{portada.tipo_publicacion}}/{{portada.id}}">{{portada.titulo}}</a>
+									<a class="titulo-portada" href="{% url 'publicaciones:publicacion' portada.tipo_publicacion portada.titulo portada.id %}">{{portada.titulo}}</a>
 									<p class="descripcion-portada">{{portada.parrafo_principal}}</p>
 								</div>
 							</article>
@@ -42,8 +42,8 @@
 				{% spaceless %}
 				{% for publicacion in ultimas_publicaciones %}
 					<article class="publicacion">
-						<a href="{{publicacion.tipo_publicacion}}/{{publicacion.id}}" class="titulo-publicacion">
-							<img src="{{MEDIA_URL}}{{publicacion.imagen_principal}}">
+						<a href="{% url 'publicaciones:publicacion'  publicacion.tipo_publicacion publicacion.titulo publicacion.id %}" class="titulo-publicacion">
+							<img src="{{MEDIA_URL}}{{publicacion.imagen}}">
 							<h2>{{publicacion.titulo}}</h2>
 						</a>
 						<div class="info">

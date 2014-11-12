@@ -5,7 +5,7 @@
 		{% if publicacion %}
 			<h1>{{publicacion.titulo}}</h1>
 			<h4>Publicado el {{publicacion.fecha_publicacion}}</h4>
-			<img class="imagen-principal" src="{{MEDIA_URL}}{{publicacion.imagen_principal}}" alt="">
+			<img class="imagen-principal" src="{{MEDIA_URL}}{{publicacion.imagen}}" alt="">
 			<p class="parrafo-principal">{{publicacion.parrafo_principal}}</p>
 			<p class="cuerpo">{{publicacion.cuerpo_publicacion|safe}}</p>
 		{% else %}

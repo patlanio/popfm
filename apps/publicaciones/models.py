@@ -4,7 +4,7 @@ from tinymce.models import HTMLField
 import datetime
 
 class Categoria(models.Model):
-	nombre = models.CharField(max_length=16)
+	nombre = models.CharField(max_length=16, verbose_name='Nombre de la categoria', help_text='Poner el nombre en minusculas')
 
 	def __str__(self):
 		return self.nombre
