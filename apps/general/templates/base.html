@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Radiorama | La cadena que une a México"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="radio, Los Mochis, radiorama, la nueva, POP FM"/>
+	<meta name="author" content="Manuel Patlan @patlanio"/>
+	{% block extra_meta_tags %}{% endblock extra_meta_tags %}
+	<title>Pop FM | {% block title %}{% endblock title %}</title>
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link type="text/plain" rel="author" href="{{STATIC_URL}}humans.txt" />
+	<link type="text/plain" rel="author" href="{{STATIC_URL}}robtos.txt" />
+	<link rel="icon" href="{{STATIC_URL}}favicon.ico">
+	<link href="{{STATIC_URL}}css/main.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}css/normalize.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}css/popfm.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}css/font-awesome.min.css" rel="stylesheet">
+	{% block extra_css %}{% endblock extra_css %}
+</head>
+<body>
+
+	<!--[if lt IE 7]>
+		<p class="browsehappy">Estas usando un navegador <strong>desactualizado</strong>. Por favor <a href="http://browsehappy.com/">actualiza tu navegador</a> para obtener una mejor experiencia en Pop FM .</p>
+	<![endif]-->
+	{% block encabezado %}
+		<header class="encabezado">
+			<menu class="menu">
+				<ul>
+					<div class="elementos-principales">
+						<li><a href="/"><img class="logo" src="{{STATIC_URL}}img/popfm.jpg"></a></li>
+						</li>
+						<li><i class="boton-play parpadeando fa fa-play fa-2x"></i>
+								{%if programa_al_aire %}
+									<span class="programa-al-aire">
+										{% for programa in programa_al_aire %}<i class="fa fa-arrow-left"></i> {{programa.nombre}} al aire.{% endfor %}
+									</span>
+								{%endif%}
+						</li>
+						<li class="reproductor"><audio id="fuente" src="http://stream2.dyndns.org:8000/xemos.mp3" controls>Hay un error con el audio</audio></li>
+					</div>
+					<div class="secciones-sitio">
+						<li><a href="/programas">Programas</a></li>
+						<li><a href="/galerias">Galerias</a></li>
+						<li><a href="/eventos">Eventos</a></li>
+						<li><a href="/videos">Videos</a></li>
+						<li><a href="#contacto">Contacto</a></li>
+					</div>
+					<div class="otras-secciones">
+						<li class=""><a class="mostrar-menu" href="#">Menu</a>
+						</li><li class="saludar"><a><i class="fa fa-comment"></i>Mandar saludo</a></li>
+						<form class="formulario-saludo" method="post" id ="formulario">
+							<div class="encabezado-seccion"><h2>Mandar saludo</h2><i class="cerrar fa fa-times pull-right"></i></div>
+							{% csrf_token %}
+							{% if not user.is_authenticated %}
+								<h2>Registrate para mandar un saludo</h2>
+								<a href="{% url 'social:begin' 'facebook' %}"><div class="facebook">Registrate con Facebook</div></a>
+								<a href="{% url 'social:begin' 'twitter' %}"><div class="twitter">Registrate con Twitter</div></a>
+							{% else %}
+								<h2>Bienvenido {{user.first_name}} {{user.last_name}}</h2>
+								<a class="cerrar-sesion pull-right" href="/salir/">Cerrar sesion</a>
+								{{formulario.as_p}}
+								<input type="submit" value="Mandar saludo!!!">
+							{%endif%}
+						</form>
+					</div>
+				</ul>
+			</menu>
+			<div class="menu-secundario">
+				<section class="saludos">
+					{% if saludos %}
+						{% spaceless %}
+						{% for saludo in saludos %}
+							<div class="saludo">
+								<span class="autor">{{saludo.autor}}</span>
+								<span class="mensaje-saludo">{{saludo.mensaje}}</span>
+							</div>
+						{% endfor %}
+						{% endspaceless %}
+					{% else %}
+						<div class="saludo">
+							<span class="autor">Pop FM</span>
+							<span class="mensaje-saludo">No hay saludos, dedicatorias ni mensajes que mostrar :( Haz uno <a class="saludar">aqui</a></span>
+						</div>
+					{% endif %}
+				</section><nav class="redes-sociales">
+					<ul>
+						<li><a href="#" target="_blank"><i class="red-social fa fa-2x fa-facebook"></i></a>
+						</li><li><a href="#" target="_blank"><i class="red-social fa fa-2x fa-twitter"></i></a>
+						</li><li><a href="#" target="_blank"><i class="red-social fa fa-2x fa-instagram"></i></a>
+					</ul>
+				</nav>
+			</div>
+		</header>
+	{% endblock encabezado %}
+	
+	{% block portadas %}{% endblock portadas %}
+	<div class="contenido" style="margin-top: {% block margin_top %}0px{% endblock margin_top %}">
+		{% spaceless %}
+			{% block contenido_central %}{% endblock contenido_central %}
+			<div class="contenido-social">
+				<div class="">
+					<div class="encabezado-seccion">
+						<h3 class="facebook"><a href="">Facebook</a></h3>
+						<h3 class="twitter"><a href="">Twitter</a></h3>
+						<h3 class="instagram"><a href="">Instagram</a></h3>
+					</div>
+					<!-- 
+						<section id="facebook">
+							<div class="fb-like-box" data-href="https://www.facebook.com/pages/POP-FM-941-FM-La-N%C3%BAmero-Uno-Los-Mochis/227194147359148" data-width="350px" data-height="475px" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="true" data-show-border="false"></div>
+						</section>
+						<section id="twitter">
+							<a class="twitter-timeline"  href="https://twitter.com/patlanio" data-widget-id="527340019845832705">Tweets por @patlanio</a>
+	            			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+						</section>
+					 -->
+					<section id="instagram">
+						<div class="instagram">
+						<i class="fa fa-5x fa-instagram"></i>Instagram
+						<h1>Contenido de Instagram</h1>
+					</div>
+					</section>
+				</div>
+				{% block contenido_social_extra %}{% endblock contenido_social_extra %}
+			</div>
+		{% endspaceless %}
+	</div>
+
+	<footer class="pie accordion vertical">
+		<section id="secciones" class="columna secciones">
+			<h3><a href="#secciones">Secciones</a></h3>
+			<ul>
+				<li><a href="/">Inicio</a></li>
+				<li><a href="/programas">Programas</a></li>
+				<li><a href="/noticias">Noticias</a></li>
+				<li><a href="/promociones">Promociones</a></li>
+				<li><a href="/galerias">Galerias</a></li>
+				<li><a href="/videos">Videos</a></li>
+				<li><a href="/sugerencia">Haz una sugerencia</a></li>
+				<li><a href="/dedicada">Haz una dedicada</a></li>
+				<li><a href="#aviso-de-privacidad">Aviso de privacidad</a></li>
+			</ul>
+		</section>
+		<section id="redes-sociales" class="columna redes-sociales">
+			<h3><a href="#redes-sociales">Nuestras redes sociales</a></h3>
+			<ul>
+				<li><a href="#" target="_blank"><i class="fa fa-5x fa-facebook"></i> Facebok</a></li>
+				<li><a href="#" target="_blank"><i class="fa fa-5x fa-twitter"></i> Twitter</a></li>
+				<li><a href="#" target="_blank"><i class="fa fa-5x fa-instagram"></i>Instragram</a></li>
+			</ul>
+		</section>
+		<section id="contacto" class="columna contacto" id="contacto">
+			<h3><a href="#contacto">Contactanos</a></h3>
+			<ul>
+				<li>Telefono 8-18-80-88</li>
+				<li>alfredo@promomedios.net</li>
+				<li>javier@promomedios.net</li>
+				<li>ventas@promomedios.net</li>
+			</ul>
+		</section>
+		<section id="visitanos" class="columna visitanos">
+			<h3><a href="#visitanos">Visitanos</a></h3>
+				<a id="abrir-mapa" target="_black" href="https://www.google.com.mx/maps/place/Radiorama+Los+Mochis/@25.788685,-108.998251,19z/data=!4m2!3m1!1s0x0:0xdd648652a0496cf2">
+					<img class="mapa" src="{{STATIC_URL}}img/mapa.png" alt="Direccion de Radiorama, Los Mochis, Sinaloa">
+					Haz clic para abrir en un mapa
+				</a>
+				<p>Estamos ubicados en Vicente Guerrero #599 Sur, Los Mochis, Sinaloa, Mexico</p>
+		</section>
+		<section id="aviso-de-privacidad" class="columna">
+			<h3><a href="#aviso-de-privacidad">Aviso de privacidad</a></h3>
+			<p>2005-2014 All rigths reserved / Todos los derechos reservados. Radiorama SA de CV</p>
+			<p>En cumplimiento a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (la "Ley"), Radiorama, S.A. de C.V., así como sus empresas subsidiarias y afiliadas (en adelante y en su conjunto identificadas como "Radiorama"), le informa que Radiorama actúa como responsable de sus datos personales. Los datos personales que recopilamos los destinamos para los siguientes propósitos: (i) fines de identificación y de verificación, (ii) contacto, (iii) ofrecerle y entregarle nuestros bienes y servicios, (v) identificar historial de participación,</p>
+			<p>Usted podrá contactarnos en cualquier momento a través de nuestro correo electrónico datospersonales@radiorama.com.mx o directamente en nuestras oficinas ubicadas en Paseo de la Reforma No 2620, piso 2, Col. Lomas Altas, Del. Miguel Hidalgo, México D.F. C.P. 11950.</p>
+			<p>Si requiere de mayor información o si tiene cualquier pregunta respecto al tratamiento de sus datos personales, por favor acceda al link aviso de privacidad en donde encontrará los términos y condiciones de nuestro Aviso de Privacidad.</p>
+		</section>
+		<section id="patlan" class="columna">
+			<h3><a href="#patlan">Desarrollado por @patlanio</a></h3>
+			<!--div class="botones-sociales">
+					<div class="fb-like" data-href="https://www.facebook.com/pages/POP-FM-941-FM-La-N%C3%BAmero-Uno-Los-Mochis/227194147359148" data-width="64px" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
+					<div class="fb-share-button" data-href="https://developers.facebook.com/"></div>
+					<a class="twitter-follow-button" href="https://twitter.com/twitterdev" data-show-count="false" data-lang="en"> Follow @patlanio</a>
+					<script type="text/javascript">
+					window.twttr = (function (d, s, id) {
+					  var t, js, fjs = d.getElementsByTagName(s)[0];
+					  if (d.getElementById(id)) return;
+					  js = d.createElement(s); js.id = id;
+					  js.src= "https://platform.twitter.com/widgets.js";
+					  fjs.parentNode.insertBefore(js, fjs);
+					  return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+					}(document, "script", "twitter-wjs"));
+					</script>
+
+					<a class="twitter-share-button"
+					  href="https://twitter.com/share"
+					  data-text="Hola"
+					  data-via = "patlanio">
+					Tweet
+					</a>
+					<script type="text/javascript">
+					window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+					</script>
+				<div id="fb-root"></div>
+				<script>(function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) return;
+					js = d.createElement(s); js.id = id;
+					js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.0";
+					fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+				</script>
+			</div-->
+		</section>
+	</footer>
+	
+	<script src="{{STATIC_URL}}js/jquery-1.9.1.min.js"></script>
+	<script src="{{STATIC_URL}}js/modernizr-2.6.2.min.js"></script>
+	<script src="{{STATIC_URL}}js/prefixfree.min.js"></script>
+	<script src="{{STATIC_URL}}js/popfm.js"></script>
+	{% block js_scripts %}{% endblock js_scripts %}
+	{% block extra_js %}{% endblock extra_js %}
+	<!--  DESCOMENTAR ESTO
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script
+		<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+		<script src="js/plugins.js"></script>
+		<script src="js/main.js"></script>
+
+		<script>
+			(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+			function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+			e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+			e.src='//www.google-analytics.com/analytics.js';
+			r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+			ga('create','UA-XXXXX-X');ga('send','pageview');
+		</script>
+	<Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+</body>
+</html>

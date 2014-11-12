@@ -5,7 +5,6 @@ from filebrowser.sites import site
 
 admin.autodiscover()
 
-
 urlpatterns = patterns('',
     ('', include('social.apps.django_app.urls', namespace='social')),
 	(r'^admin/filebrowser/', include(site.urls)),
@@ -15,4 +14,6 @@ urlpatterns = patterns('',
 
     url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT,}),
     
+    url(r'^$', 'apps.general.views.index', name='index'),
+    url(r'^salir/$', 'apps.general.views.logOut'),
 )
