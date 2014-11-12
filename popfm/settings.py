@@ -41,9 +41,9 @@ INSTALLED_APPS = (
     'tinymce',
     'social.apps.django_app.default',
     'apps.general',
-    #'apps.programas',
-    #'apps.publicaciones',
+    'apps.publicaciones',
     #'apps.publico',
+    #'apps.programas',
     #'apps.eventos',
     #'apps.multimedia',
 )
