@@ -30,12 +30,22 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'grappelli',
+    'filebrowser', #grappelli y filebrowser deben estar antes de django.admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tinymce',
+    'social.apps.django_app.default',
+    #'apps.programas',
+    #'apps.publicaciones',
+    #'apps.general',
+    #'apps.publico',
+    #'apps.eventos',
+    #'apps.multimedia',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -59,21 +69,17 @@ WSGI_APPLICATION = 'popfm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'popfm.sqlite3'),
     }
 }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+LANGUAGE_CODE = 'es-mx'
+TIME_ZONE = 'America/Mazatlan'
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -81,3 +87,34 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = STATIC_URL #AGREAGADO PARA QUE FUNCIONE TYNIMCE
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,'static'),
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".# Always use forward slashes, even on Windows. # Don't forget to use absolute paths, not relative paths.
+)
+TEMPLATE_DIRS = (os.path.join(BASE_DIR,'templates'),)  #ALTERNATIVO -- RUTA_PROYECTO = os.path.dirname(os.path.realpath(__file__))
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookAppOAuth2',
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend'
+)
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_TWITTER_KEY = 'mCnYG9xytdckyR1sVRdWfVe09'
+SOCIAL_AUTH_TWITTER_SECRET = 'T9VT3EA6RfobkKSB84U6wbsKZTz8qd0FYhRz2sqrcdFHmDwGF3'
+SOCIAL_AUTH_FACEBOOK_KEY = '739973569411948'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'fa9cd27b881a54cf39571a314a8d85c8'
+
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '.example.com',  # Allow domain and subdomains
+    '.example.com.',  # Also allow FQDN and subdomains
+]
