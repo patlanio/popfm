@@ -7,8 +7,8 @@ def indexPublicaciones(request):
 	contexto['todas_las_publicaciones'] = Publicacion.objects.all().order_by('-fecha_publicacion')
 	return render(request, 'publicaciones/publicaciones.html', contexto)
 
-def detallesPublicacion(request, publicacion_id, publicacion_titulo, publicacion_tipo_publicacion):
+def detallesPublicacion(request, publicacion_tipo_publicacion, publicacion_titulo):
 	contexto =  get_contexto_general(request)
-	contexto['publicacion'] = get_object_or_404(Publicacion, pk = publicacion_id)
+	contexto['publicacion'] = get_object_or_404(Publicacion, titulo = publicacion_titulo)
 	
 	return render(request, 'publicaciones/publicacion.html', contexto)

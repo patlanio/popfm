@@ -8,7 +8,7 @@
 		{% if todas_las_publicaciones %}
 			{% for publicacion in todas_las_publicaciones %}
 				<article class="publicacion">
-					<a href="{% url 'publicaciones:publicacion' publicacion.id %}">
+					<a href="{% url 'publicaciones:publicacion' publicacion.tipo_publicacion publicacion.titulo %}">
 						<img src="{{MEDIA_URL}}{{publicacion.imagen}}">
 						<h2>{{publicacion.titulo}}</h2>
 					</a>

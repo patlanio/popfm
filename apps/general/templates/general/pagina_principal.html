@@ -15,7 +15,7 @@
 					{% for portada in publicaciones_en_portada %}
 							<article class="portada slide" style="background-image: url({{MEDIA_URL}}{{portada.imagen}});">
 								<div class="contenido-portada">
-									<a class="titulo-portada" href="{% url 'publicaciones:publicacion' portada.tipo_publicacion portada.titulo portada.id %}">{{portada.titulo}}</a>
+									<a class="titulo-portada" href="{% url 'publicaciones:publicacion' portada.tipo_publicacion portada.titulo %}">{{portada.titulo}}</a>
 									<p class="descripcion-portada">{{portada.parrafo_principal}}</p>
 								</div>
 							</article>
@@ -42,7 +42,7 @@
 				{% spaceless %}
 				{% for publicacion in ultimas_publicaciones %}
 					<article class="publicacion">
-						<a href="{% url 'publicaciones:publicacion'  publicacion.tipo_publicacion publicacion.titulo publicacion.id %}" class="titulo-publicacion">
+						<a href="{% url 'publicaciones:publicacion'  publicacion.tipo_publicacion publicacion.titulo %}" class="titulo-publicacion">
 							<img src="{{MEDIA_URL}}{{publicacion.imagen}}">
 							<h2>{{publicacion.titulo}}</h2>
 						</a>
