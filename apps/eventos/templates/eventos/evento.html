@@ -1,0 +1,35 @@
+{% extends 'base_contenido.html' %}
+{% block title %}{{evento.nombre}}{% endblock title %}
+{% block contenido_central %}
+	<div class="publicaciones">
+		{% if evento %}
+			<h1>{{evento.nombre}}</h1>
+			<h4>{{evento.fecha_evento}}</h4>
+			<img class="imagen-principal" src="{{MEDIA_URL}}{{evento.imagen_principal}}" alt="">
+			<p class="parrafo-principal">{{evento.parrafo_principal}}</p>
+			<p>{{evento.cuerpo|safe}}</p>
+			{% if videos_evento or imagenes_evento %}
+				<div class="algo">
+					<h2>{% if imagenes_evento %}Imagenes{% endif %} {% if videos_evento and imagenes_evento %} y {% endif %} {% if videos_evento %}Videos{% endif %} de este evento <button class="iniciar-galeria">Ampliar</button></h2>
+					{% if videos_evento %}
+						{% for video in videos_evento %}
+							<article class="publicacion video">
+								<iframe src="{{video.url}}" frameborder="0" allowfullscreen></iframe>
+								<a><h3>{{video.nombre}}</h3></a>
+							</article>
+						{% endfor %}
+					{% endif%}
+					{% if imagenes_evento %}
+						{% for imagen in imagenes_evento %}
+							<article class="evento">
+								<img src="{{MEDIA_URL}}{{imagen.imagen}}">
+							</article>
+						{% endfor %}
+					{% endif %}
+					
+				</div>
+			{% endif %}
+			
+		{% endif %}
+	</div>
+{% endblock contenido_central %}

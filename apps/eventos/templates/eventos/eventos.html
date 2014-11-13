@@ -1,0 +1,25 @@
+{% extends 'base_contenido.html' %}
+{% block title %}Eventos{% endblock title %}
+{% block contenido_central %}
+	<div class="publicaciones">
+		<div class="encabezado-seccion">
+			<h2>Eventos</h2>
+		</div>
+		{% if eventos %}
+			{% for evento in eventos %}
+				<article class="publicacion evento">
+					<a href="{% url 'eventos:evento' evento.nombre %}">
+						<h2>{{evento.nombre}}</h2>
+						<img src="{{MEDIA_URL}}{{evento.imagen_principal}}">
+					</a>
+					<div class="info">
+						<div class="descripcion">{{evento.parrafo_principal}}</div>
+						<span class="fecha">{{evento.fecha_evento}}</span>
+					</div>
+				</article>
+			{% endfor %}
+		{% else %}
+			<p>No hay eventos.</p>
+		{% endif %}
+	</div>
+{% endblock contenido_central %}

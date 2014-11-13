@@ -18,4 +18,5 @@ urlpatterns = patterns('',
     url(r'^salir/$', 'apps.general.views.logOut'),
     url(r'^', include('apps.publicaciones.urls', namespace="publicaciones")),
     url(r'^', include('apps.programas.urls', namespace="programas")),
+    url(r'^', include('apps.eventos.urls', namespace="eventos")),
 )

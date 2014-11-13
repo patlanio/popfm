@@ -44,8 +44,7 @@ INSTALLED_APPS = (
     'apps.publicaciones',
     'apps.publico',
     'apps.programas',
-    #'apps.eventos',
-    #'apps.multimedia',
+    'apps.eventos',
 )
 
 MIDDLEWARE_CLASSES = (
