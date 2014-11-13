@@ -7,7 +7,7 @@
 			<h4>Publicado el {{publicacion.fecha_publicacion}}</h4>
 			<img class="imagen-principal" src="{{MEDIA_URL}}{{publicacion.imagen}}" alt="">
 			<p class="parrafo-principal">{{publicacion.parrafo_principal}}</p>
-			<p class="cuerpo">{{publicacion.cuerpo_publicacion|safe}}</p>
+			<p class="cuerpo">{{publicacion.cuerpo|safe}}</p>
 		{% else %}
 			<h1>Hubo un error al cargar la publicacion, probablemente ya no existe; intetalo mas tarde.</h1>
 		{% endif %}
