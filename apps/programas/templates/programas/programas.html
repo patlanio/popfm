@@ -1,0 +1,36 @@
+{% extends 'base_contenido.html' %}
+{% block title %}Programacion{% endblock title %}
+{% block contenido_central %}
+	<div class="publicaciones">
+		<div class="encabezado-seccion">
+			<h2>Nuestros programas</h2>
+		</div>
+		{% if programas %}
+			{% for programa in programas %}
+				<article class="publicacion programa">
+					<a href="{% url 'programas:programa' programa.nombre %}">
+						<img src="{{MEDIA_URL}}{{programa.imagen}}">
+						<h2>{{programa.nombre}}</h2>
+					</a>
+					<div class="horario">
+						<h3 class="horario">De {{programa.hora_inicio|date:"P"}} a {{programa.hora_fin|date:"P"}}</h3>
+						<div class="dias">
+							{%if programa.lunes%}<span class="dia">Lun</span>{%endif%}
+							{%if programa.martes%}<span class="dia">Mar</span>{%endif%}
+							{%if programa.miercoles%}<span class="dia">Mie</span>{%endif%}
+							{%if programa.jueves%}<span class="dia">Jue</span>{%endif%}
+							{%if programa.viernes%}<span class="dia">Vie</span>{%endif%}
+							{%if programa.sabado%}<span class="dia">Sab</span>{%endif%}
+							{%if programa.domingo%}<span class="dia">Dom</span>{%endif%}
+						</div>
+					</div>
+					<div class="info">
+						<p class="descripcion">{{programa.descripcion}}</p>
+					</div>
+				</article>
+			{% endfor %}
+		{% else %}
+			<p>No hay programas.</p>
+		{% endif %}
+	</div>
+{% endblock contenido_central %}

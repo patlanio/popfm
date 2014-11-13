@@ -1,0 +1,27 @@
+{% extends 'base_contenido.html' %}
+{% block title %}{{programa.nombre}}{% endblock title %}
+{% block contenido_central %}
+	<article class="articulo-completo">
+		<h1>{{programa.nombre}}</h1>
+		<img src="{{MEDIA_URL}}{{programa.imagen}}" alt="">
+		<p>{{programa.descripcion}}</p>
+		<h2>Escuchalo de {{programa.hora_inicio|date:"P"}} a {{programa.hora_fin|date:"P"}} todos los:</h2>
+		<ul>
+			{%if programa.lunes%}<li>Lunes</li>{%endif%}
+			{%if programa.martes%}<li>Martes</li>{%endif%}
+			{%if programa.miercoles%}<li>Miercoles</li>{%endif%}
+			{%if programa.jueves%}<li>Jueves</li>{%endif%}
+			{%if programa.viernes%}<li>Viernes</li>{%endif%}
+			{%if programa.sabado%}<li>Sabados</li>{%endif%}
+			{%if programa.domingo%}<li>Domingos</li>{%endif%}
+		</ul>
+		<h3>Conducen:</h3>
+		<div>
+			<ul>
+				{% for locutores in programa.locutores.all %}
+					<li>{{locutores.nombre}}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</article>
+{% endblock contenido_central %}

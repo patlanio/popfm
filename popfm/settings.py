@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'apps.general',
     'apps.publicaciones',
     'apps.publico',
-    #'apps.programas',
+    'apps.programas',
     #'apps.eventos',
     #'apps.multimedia',
 )
