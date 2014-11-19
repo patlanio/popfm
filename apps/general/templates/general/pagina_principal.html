@@ -5,27 +5,31 @@
 <body>
 	{% block portadas %}
 		<section id="portadas" class="portadas contenido-principal">
-			<div class="controles-portada">
+			<div class="control-portada control-izq">
 				<i class="flecha flecha-izquierda fa fa-arrow-left"></i>
+			</div>
+			<div class="control-portada control-der">
 				<i class="flecha flecha-derecha fa fa-arrow-right"></i>
 			</div>
-			<div class="slider" data-slides="" u="slides">
+			<div class="slider">
 				{% if publicaciones_en_portada %}
 					{% spaceless %}
 					{% for portada in publicaciones_en_portada %}
-							<article class="portada slide" style="background-image: url({{MEDIA_URL}}{{portada.imagen}});">
-								<div class="contenido-portada">
-									<a class="titulo-portada" href="{% url 'publicaciones:publicacion' portada.tipo_publicacion portada.titulo %}">{{portada.titulo}}</a>
-									<p class="descripcion-portada">{{portada.parrafo_principal}}</p>
-								</div>
-							</article>
+							<a href="{% url 'publicaciones:publicacion' portada.tipo_publicacion portada.titulo %}">
+								<article class="portada slide" style="background-image: url({{MEDIA_URL}}{{portada.imagen}});">
+									<div class="info">
+										<h2 class="titulo">{{portada.titulo}}</h2>
+										<p class="descripcion">{{portada.parrafo_principal}}</p>
+									</div>
+								</article>
+							</a>
 					{% endfor %}
 					{% endspaceless %}
 				{% else %}
 					<article class="portada slide" style="background-image: url({{STATIC_URL}}img/popfm.jpg);">
-						<div class="contenido-portada">
-							<a class="titulo-portada" href="#">No hay publicaciones</a>
-							<p class="descripcion-portada">en portada</p>
+						<div class="info">
+							<h2 class="titulo">No hay publicaciones</h2>
+							<p class="descripcion">en portada</p>
 						</div>
 					</article>
 				{% endif %}
@@ -53,10 +57,9 @@
 				{% endfor %}
 				{% endspaceless %}
 			{% else %}
-				<h2>No hay publicaciones que mostrar!</h2>
+				<h2>No hay publicaciones que mostrar</h2>
 			{% endif %}
 		</section>
 	{% endblock contenido_central %}
-	{% block contenido_social_extra %}{% endblock contenido_social_extra %}
 </body>
 </html>
