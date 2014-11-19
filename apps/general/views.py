@@ -9,7 +9,8 @@ def logOut(request):
 
 def index(request):
 	contexto = get_contexto_general(request)
-	contexto['publicaciones_en_portada'] =  Publicacion.objects.filter(fecha_expiracion__gte=timezone.now()).filter(fecha_publicacion__lte = timezone.now()).filter(listo_para_publicar = True).filter(en_portada = True).order_by('fecha_publicacion')[:12]
+	#contexto['publicaciones_en_portada'] =  Publicacion.objects.filter(fecha_expiracion__gte=timezone.now()).filter(fecha_publicacion__lte = timezone.now()).filter(listo_para_publicar = True).filter(en_portada = True).order_by('fecha_publicacion')[:12]
+	contexto['publicaciones_en_portada'] =  Publicacion.objects.filter(fecha_expiracion__gte=timezone.now()).filter(listo_para_publicar = True).filter(en_portada = True).order_by('-fecha_publicacion')[:12]
 	contexto['ultimas_publicaciones'] = Publicacion.objects.filter(listo_para_publicar = True).order_by('-fecha_publicacion')[:12]
 	
 	return render(request, 'general/pagina_principal.html', contexto)
