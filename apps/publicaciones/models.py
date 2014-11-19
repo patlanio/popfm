@@ -1,10 +1,11 @@
+#encoding:utf-8
 from django.db import models
 
 from tinymce.models import HTMLField
 import datetime
 
 class Categoria(models.Model):
-	nombre = models.CharField(max_length=16, verbose_name='Nombre de la categoria', help_text='Poner el nombre en minusculas')
+	nombre = models.CharField(max_length=16, verbose_name='Nombre de la categoria', help_text='Poner el nombre en minusculas y en singular [se usa para poner en la URL, por ejemplo /chisme, /noticia, /tip, etc] ')
 
 	def __str__(self):
 		return self.nombre
