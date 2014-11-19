@@ -60,9 +60,20 @@
 								<a href="{% url 'social:begin' 'facebook' %}"><div class="facebook">Registrate con Facebook</div></a>
 								<a href="{% url 'social:begin' 'twitter' %}"><div class="twitter">Registrate con Twitter</div></a>
 							{% else %}
-								<h2>Bienvenido {{user.first_name}} {{user.last_name}}</h2>
-								<a class="cerrar-sesion pull-right" href="/salir/">Cerrar sesion</a>
-								{{formulario.as_p}}
+								<h4>Bienvenido {{user.first_name}} {{user.last_name}}</h4>
+								<a class="cerrar-sesion pull-right" href="/salir/">No eres tu? Cierra sesion y entra desde tu cuenta</a>
+								{{formulario.as_p}} 
+								<!--
+								{% for field in formulario %}
+								        {{ field.errors }}
+								        {{ field.label_tag }} {{ field }}
+								{% endfor %}
+								{% if formulario %}
+									<input type="hidden" name="nombre" value="{{user.first_name}} {{user.last_name}}">
+									{{formulario.mensaje}}
+								{% endif %}
+							-->
+
 								<input type="submit" value="Mandar saludo!!!">
 							{%endif%}
 						</form>
@@ -75,7 +86,7 @@
 						{% spaceless %}
 						{% for saludo in saludos %}
 							<div class="saludo">
-								<span class="autor">{{saludo.autor}}</span>
+								<span class="autor">{{saludo.nombre}}</span>
 								<span class="mensaje-saludo">{{saludo.mensaje}}</span>
 							</div>
 						{% endfor %}
