@@ -4,6 +4,6 @@ from apps.publico.models import Saludo
 
 class SaludoForm(forms.ModelForm):
 	class Meta:
- 		fields = "__all__"
- 		#fields = ['nombre', 'correo', 'mensaje']
+ 		#fields = "__all__"
+ 		fields = ['nombre', 'correo', 'mensaje']
  		model = Saludo

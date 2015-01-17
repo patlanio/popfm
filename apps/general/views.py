@@ -21,15 +21,17 @@ def get_contexto_general(request):
 	from apps.publico.forms import SaludoForm
 	saludos = Saludo.objects.all()
 	#programa_al_aire = Programa.objects.filter(hora_fin__lte=timezone.now()).order_by('-hora_fin')[:1]
-
+	mostrar_formulario = False
 	if request.method == 'POST':
 		formulario = SaludoForm(request.POST)
 		if formulario.is_valid():
 			formulario.save()
 			return HttpResponseRedirect('/')
+		else:
+			mostrar_formulario = True
 	else:
 		formulario = SaludoForm()
 	
 	#contexto_general = {'programa_al_aire':programa_al_aire,'formulario':formulario, 'saludos':saludos}
-	contexto_general = {'formulario':formulario, 'saludos':saludos}
+	contexto_general = {'formulario':formulario, 'saludos':saludos, 'mostrar_formulario':mostrar_formulario}
 	return contexto_general

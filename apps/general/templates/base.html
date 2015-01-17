@@ -52,30 +52,39 @@
 					<div class="otras-secciones">
 						<li class=""><a class="mostrar-menu" href="#">Menu</a>
 						</li><li class="saludar"><a><i class="fa fa-comment"></i>Mandar saludo</a></li>
-						<form class="formulario-saludo" method="post" id ="formulario">
+						<form class="formulario-saludo {% if mostrar_formulario %}
+							visible
+						{% endif %} " method="post" id="formulario">
 							<div class="encabezado-seccion"><h2>Mandar saludo</h2><i class="cerrar fa fa-times pull-right"></i></div>
 							{% csrf_token %}
 							{% if not user.is_authenticated %}
-								<h2>Registrate para mandar un saludo</h2>
-								<a href="{% url 'social:begin' 'facebook' %}"><div class="facebook">Registrate con Facebook</div></a>
-								<a href="{% url 'social:begin' 'twitter' %}"><div class="twitter">Registrate con Twitter</div></a>
+								<h2>Inicia sesion con una de las siguientes redes sociales para mandar un saludo</h2>
+								<a href="{% url 'social:begin' 'facebook' %}"><h3 class=" iniciar-sesion facebook">Facebook</h3></a>
+								<a href="{% url 'social:begin' 'twitter' %}"><h3 class=" iniciar-sesion twitter">Twitter</h3></a>
 							{% else %}
-								<h4>Bienvenido {{user.first_name}} {{user.last_name}}</h4>
-								<a class="cerrar-sesion pull-right" href="/salir/">No eres tu? Cierra sesion y entra desde tu cuenta</a>
-								{{formulario.as_p}} 
+								<h2>Hola
+									{% if user.first_name or user.last_name %}
+										{{user.first_name}} {{user.last_name}}
+									{%else%}
+										{{user}}
+									{% endif %}
+								</h2>
+								<a class="cerrar-sesion" href="salir/">No eres tu? Cierra sesion y entra desde tu cuenta</a>
 								<!--
-								{% for field in formulario %}
-								        {{ field.errors }}
-								        {{ field.label_tag }} {{ field }}
-								{% endfor %}
-								{% if formulario %}
+								{{formulario.as_p}}
 									<input type="hidden" name="nombre" value="{{user.first_name}} {{user.last_name}}">
 									{{formulario.mensaje}}
+								-->
+								{% if formulario %}
+									{% for campo in formulario %}
+									        {{ campo.errors }}
+									        {{ campo.label_tag }} {{ campo }}
+									{% endfor %}
 								{% endif %}
-							-->
 
-								<input type="submit" value="Mandar saludo!!!">
+								<input type="submit" value="Mandar saludo!">
 							{%endif%}
+							<h6>Nunca guardamos ni almacenamos tus datos.</h6>
 						</form>
 					</div>
 				</ul>

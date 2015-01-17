@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.programas.models import Programa, Locutor
+from apps.programas.models import Programa, Locutor, Pokemon
 
 class LocutorAdmin(admin.ModelAdmin):
 	list_display = ('nombre', 'id',)

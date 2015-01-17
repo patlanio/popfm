@@ -30,3 +30,6 @@ class Programa(models.Model):
 
 	def __str__(self):
 		return self.nombre
+
+class Pokemon(models.Model):
+	nombre = models.CharField(max_length=255)

@@ -4,15 +4,33 @@ var totalSlides;
 var slideActual = 0;
 var intervalo;
 
+/*
+
+Esta libreria tiene como dependencia Jquery 1.9
+para poder usarla hay que tener definidos en nuestro HTML los elementos que se describen en el codigo con la siguiente estructura
+
+$('#OBJETOS_POR_ID')...
+$('.OBJETOS_POR_CLASE')...
+
+*/
+//cuando la pagina esta lista se ejecuta la funcion main
 $(document).on('ready', main);
 function main(){
+	//obtenemos la url de la fuente del audio que se esta transmitiendo por internet totalmente en vivo
 	estacionActual = document.getElementById('fuente');
-
+	//se agrega el evento para pausar/iniciar el audio
 	$('.boton-play').on('click', iniciarPausarRadio);
+	//se agrega el evento para mostrar un formulario para enviar saludos y dedicatorias
 	$('.saludar').on('click', mostrarOcultarFormulario);
+	//se agrega el evento para cerrar el formulario anterior
 	$('.cerrar').on('click', mostrarOcultarFormulario);
 	//$('boton-play').click();
 
+	/*
+	Si estamos en la pagina principal checa que haya elementos "portada"
+	y cuenta cuantos son, en caso de que sean menos de 2 se ocultan las flechas de navegacion
+	si no, se agregan eventos para mover las portadas hacia la derecha o izquierda
+	*/
 	if ($('.portadas .portada').size() < 2 ) {
 		//alert("Son poquitas, no se iniciara el slider");
 		$('.flecha').hide();
@@ -37,6 +55,9 @@ function main(){
 	sumarAnchoSaludos();
 }
 
+/*
+Esto es para mover los saludos de forma tal que se muestren todos por la pantalla
+*/
 function sumarAnchoSaludos(){
 	//alert($('.saludos').width());
 	var suma = 0;
@@ -65,9 +86,11 @@ function recorrerSaludos(){
 	});
 }
 
+//Funcion para mostrar/ocultar formularios
 function mostrarOcultarFormulario(){
 	$('.formulario-saludo').fadeToggle('fast');
 }
+//funcion para mover las portadas 
 function desplazarSlider(direccion){
 	if (slideActual == totalSlides-1) {slideActual = 0;}
 	else{slideActual++}
@@ -77,6 +100,7 @@ function desplazarSlider(direccion){
 	//slideActual++;
 }
 
+//funcion para iniciar/pausar audios
 function iniciarPausarRadio(){
 	if (!estaReproduciento) {
 		estacionActual.play();

@@ -19,7 +19,6 @@ menu, .encabezado ul, .encabezado li{
 	width: 100%;
 	padding: 0.5em 5%;
 }
-
 .encabezado{
 	background-color: rgba(255,255,255,0.1);
 	background-color: #FFF;
@@ -37,7 +36,6 @@ menu, .encabezado ul, .encabezado li{
 	height: 5em;
 	width: 100%;
 }
-
 .menu a{
 	padding: 0 0.75em;
 	text-decoration: none;
@@ -63,14 +61,12 @@ menu, .encabezado ul, .encabezado li{
 	overflow: hidden;
 	display: none;
 }
-
 .parpadeando{
 	animation-name: resaltar;
 	animation-duration: 5s;
 	animation-direction: alternate;
 	animation-iteration-count: infinite;
 }
-
 @keyframes resaltar {
 	from { opacity: 1; /*color: #2E81EB;*/}
 	95% { opacity: 1; /*color: #2E81EB;*/}
@@ -78,11 +74,7 @@ menu, .encabezado ul, .encabezado li{
 }
 
 .boton-play{margin-top: 0.75em;}
-.menu .fa-arrow-left{margin-top: 1.875em;}
-.elementos-principales{
-	float: left;
-}
-
+.elementos-principales{float: left;}
 .elementos-principales,
 .secciones-sitio,
 .otras-secciones{
@@ -143,7 +135,9 @@ input, textarea{
 	margin-bottom: 0.5em;
 }
 
-
+.formulario-saludo h2{
+	margin: 0;
+}
 form .errorlist li {
 	line-height: 1em;
 	list-style: none;
@@ -153,6 +147,18 @@ form .errorlist li {
 	width: 100%;
 	color: #FFF;
 	padding: 0.25em;
+}
+.visible{
+	display: inherit;
+}
+
+.iniciar-sesion{
+	margin: 0;
+	font-size: 1.5em;
+	color: #FFF;
+	font-weight: bold;
+	padding: 0.25em;
+	text-align: center;
 }
 .cerrar-sesion{font-size: 0.675em;}
 
@@ -262,12 +268,11 @@ form .errorlist li {
 	width: 100vw;
 	display: inline-block;
 }
-.controles-portada{
-	width: 100%;
+.control-portada{
 	position: absolute;
-	height: 100%;
 	top: calc(50% - 2em);
 }
+.control-der{left: calc(100% - 4em);}
 .flecha{
 	z-index: 3;
 	position: relative;
@@ -287,26 +292,29 @@ form .errorlist li {
 .flecha-izquierda{float: left; left: 0.25em;}
 .flecha-derecha{float:right; right: 0.25em;}
 
-.contenido-portada{
+.portada a{text-decoration: none;}
+.portada .info{
 	width: 75%;
 	padding: 1em;
 	height: 25%;
-	background-color: rgba(255,255,255,0.7);
+	background-color: rgba(255,255,255,0.85);
 	overflow: hidden;
 	position: relative;
 	left: 1em;
 	top: calc(75% - 3em);
 }
 
-.contenido-portada .titulo-portada{
-	max-height: 40%;
-	overflow: hidden;
-	margin-bottom: 0;
-	padding-bottom: 0;
+.portada .info .titulo{
+	margin: 0;
+	font-weight: normal;
 	width: 100%;
-	font-size: 3em;
+	font-size: 2.75em;
 }
-.contenido-portada .descripcion-portada{
+.portada .info .descripcion{
+	margin: 0;
+	max-width: 100%;
+	white-space: pre-wrap;
+	font-size: 1.25em;
 	max-height: 60%;
 	overflow: hidden;
 }
@@ -552,7 +560,7 @@ form .errorlist li {
 	.saludos{width: 75%;}
 	.redes-sociales{width: 25%;}
 	.portadas{height: 56.25vw; font-size: 14px;}
-	.contenido-portada{width: calc(100% - 4em);}
+	.portada .info{width: calc(100% - 4em);}
 	.contenido{padding: 0.5%}
 	.publicaciones,	.contenido-social{width: 100%;}
 	.publicacion{width: 50%;}
@@ -569,8 +577,8 @@ form .errorlist li {
 	.saludos{width: 65%;}
 	.redes-sociales{width: 35%;}
 	.portadas{height: 56.25vw; font-size: 14px;}
-	.contenido-portada{width: calc(100% - 4em);}
-	.contenido-portada .titulo-portada{font-size: 28px;}
+	.portada .info{width: calc(100% - 4em);}
+	.portada .info .titulo-portada{font-size: 28px;}
 	.contenido{padding: 0.5%}
 	.publicaciones, .contenido-social{width: 100%;}
 	.publicacion{width: 49% !important;}
@@ -612,8 +620,8 @@ form .errorlist li {
 	.saludos{width: 65%;}
 	.redes-sociales{width: 35%;}
 	.portadas{height: 56.25vw; font-size: 12px;}
-	.contenido-portada{width: calc(100% - 4em);}
-	.contenido-portada .titulo-portada{font-size: 22px;}
+	.portada .info{width: calc(100% - 4em);}
+	.portada .info .titulo-portada{font-size: 22px;}
 	.publicaciones, .contenido-social{width: 100%;}
 	.publicacion{width: 100%; margin-bottom: 3px;}
 	.encabezado-seccion a{
